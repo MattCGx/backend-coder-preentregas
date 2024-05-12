@@ -1,8 +1,8 @@
-// imports
+
 
 import { Router } from "express";
 import { __dirname } from "../path.js";
-import { productValidation } from "../middlewares/productValidation";
+import { productValidation } from "../middlewares/productValidation.js";
 import ProductManager from "../managers/products.manager.js";
 
 // instancias
@@ -26,7 +26,7 @@ productRouter.get("/:productId", async (req, res) => {
 
     try {
         const { productId } = req.params;
-        const product = await productManager.getProductsById(productId);
+        const product = await productManager.getProductById(productId);
         !product ? res.status(404).json({ error: "Product not found" }) : res.status(200).json(product);
     } catch (error) {
         res.status(500).json({ error: error.message }); 
@@ -64,3 +64,5 @@ productRouter.delete("/:productId", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 })
+
+export default productRouter;

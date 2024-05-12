@@ -39,7 +39,7 @@ class ProducstManager {
     }
   }
 
-  async getProductsById(id) {
+  async getProductById(id) {
     try {
       const products = await this.getProducts();
       const productListed = products.find((product) => product.id === id);

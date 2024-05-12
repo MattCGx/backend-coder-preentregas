@@ -6,14 +6,14 @@ import CartsManager from "../managers/carts.manager.js";
 // instancias
 
 const cartRouter = Router();
-const cartManager = new CartsManager(`${__dirname}/db/products.json`);
+const cartsManager = new CartsManager(`${__dirname}/db/carts.json`);
 
 // rutas para products
 
 cartRouter.get("/:cartID", async (req, res) => {
     try {
         const {cartID} = req.params;
-        const cart = await cartManager.getCartById(cartID);
+        const cart = await cartsManager.getCartById(cartID);
         !cart ? res.status(404).json({ error: "Cart not found" }) : res.status(200).json(cart);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -23,19 +23,21 @@ cartRouter.get("/:cartID", async (req, res) => {
 
 cartRouter.post("/", async (req, res) => {
     try {
-       const cart = await cartManager.addNewCart();
+       const cart = await cartsManager.addNewCart();
        res.status(201).json(cart);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 })
 
-cartRouter.post("/:cartID/products/:productID", AddProdToCartValidation, async (req, res) => {
+cartRouter.post("/:cartID/product/:productID", async (req, res) => {
     try {
       const {cartID, productID} = req.params;
-      const cart = await cartManager.addProductToCart(cartID, productID);
-      !cart ? res.status(404).json({ error: "Cart not found" }) : res.status(201).json(cart);  
+      const cart = await cartsManager.addProductToCart(cartID, productID);
+        res.status(200).json(cart);  
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 })
+
+export default cartRouter;

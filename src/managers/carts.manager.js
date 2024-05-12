@@ -1,15 +1,15 @@
-// imports
+
 
 import fs from 'fs';
 import {v4 as uuid} from 'uuid';
-//import { __dirname } from '../path.js';
+import { __dirname } from '../path.js';
 import ProductsManager from './products.manager.js';
 
 // Instancias
 
-//const productsManager = new ProductsManager(`${__dirname}/db/products.json`);
+const productsManager = new ProductsManager(`${__dirname}/db/products.json`);
 
-// def clase
+
 
 class CartsManager {
     constructor(path) {
@@ -34,7 +34,7 @@ class CartsManager {
         try {
             const newCart = {
                 id: uuid(),
-                productsInCart: [],
+                products: [],
             };
             const carts = await this.getCarts();
             carts.push(newCart);
@@ -57,22 +57,34 @@ class CartsManager {
 
     async addProductToCart(cartId, productId) {
         try {
+            const product = await productsManager.getProductById(productId);
+            if(!product) {
+                throw new Error("Producto no encontrado");
+            }
+    
             let carts = await this.getCarts();
-            const cartToUpdate = await this.getCartById(cartId);
-            const productInCart = cartToUpdate.products.find((prod) => prod.id === productId);
+            const cart = carts.find((cart) => cart.id === cartId);
+            if(!cart) {
+                throw new Error("Carrito no encontrado");
+            }
+    
+            const productInCart = cart.products.find((prod) => prod.id === productId);
             if (!productInCart){
                 const prodToAdd = {
                     id: productId,
                     quantity: 1,
                 };
-                cartToUpdate.products.push(prodToAdd);
-            }else {
+                cart.products.push(prodToAdd);
+            } else {
                 productInCart.quantity++;
             }
-            const cartsUpdated = carts.map((cart) => cart.id === cartId ? cartToUpdate :  cart);            
+    
+            const cartsUpdated = carts.map((cart) => cart.id === cartId ? cart :  cart);            
             await fs.promises.writeFile(this.path, JSON.stringify(cartsUpdated, null, '\t'));
+            return cart;
         } catch (error) {
             console.error(error);
+            throw error;
         }
     }
 

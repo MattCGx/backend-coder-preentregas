@@ -15,8 +15,8 @@ const productManager = new ProductManager(`${__dirname}/db/products.json`);
 
 productRouter.get("/", async (req, res) => {
     try {
-        const {queryLimit} = req.query;
-        const products = await productManager.getProducts(queryLimit);
+        const {limit} = req.query;
+        const products = await productManager.getProducts(limit);
         !products ? res.status(404).json({ error: "Products not found" }) : res.status(200).json(products);
     } catch (error) {
         res.status(500).json({ error: error.message });

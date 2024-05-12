@@ -19,6 +19,95 @@
 		"price": 500000,
 		"stock": 10,
 		"category": "Impresoras"
+	},
+	{
+		"id": "98c79d19-0f10-45d2-9528-0063827674be",
+		"status": true,
+		"title": "ender 3 pro",
+		"description": "impresora 3d FDM",
+		"code": "e3p1",
+		"price": 250000,
+		"stock": 15,
+		"category": "Impresoras"
+	},
+	{
+		"id": "a4e2bde0-4922-4dac-8af5-12b5598c21b5",
+		"status": true,
+		"title": "ender 5 pro",
+		"description": "impresora 3d FDM",
+		"code": "e5p1",
+		"price": 550000,
+		"stock": 12,
+		"category": "Impresoras"
+	},
+	{
+		"id": "d1184cd4-f472-4229-83cb-3d21771ba00d",
+		"status": true,
+		"title": "ender 6",
+		"description": "impresora 3d FDM",
+		"code": "e6v1",
+		"price": 600000,
+		"stock": 10,
+		"category": "Impresoras"
+	},
+	{
+		"id": "c61c73e7-9931-4be1-8ced-f25c6cf28795",
+		"status": true,
+		"title": "creality cr-10",
+		"description": "impresora 3d FDM",
+		"code": "cr10v1",
+		"price": 300000,
+		"stock": 20,
+		"category": "Impresoras"
+	},
+	{
+		"id": "89588f79-3dcc-4955-ab51-e145ed83b59a",
+		"status": true,
+		"title": "creality cr-10 v2",
+		"description": "impresora 3d FDM",
+		"code": "cr10v2",
+		"price": 350000,
+		"stock": 18,
+		"category": "Impresoras"
+	},
+	{
+		"id": "313ec57c-a4f5-42e6-8e57-28619de242ec",
+		"status": true,
+		"title": "creality cr-10 v3",
+		"description": "impresora 3d FDM",
+		"code": "cr10v3",
+		"price": 400000,
+		"stock": 16,
+		"category": "Impresoras"
+	},
+	{
+		"id": "127c9ac5-1868-419f-8f04-f0ddff884cb1",
+		"status": true,
+		"title": "creality cr-10 max",
+		"description": "impresora 3d FDM",
+		"code": "cr10max",
+		"price": 800000,
+		"stock": 5,
+		"category": "Impresoras"
+	},
+	{
+		"id": "65a53fe7-a726-4b67-b97b-94041455d41d",
+		"status": true,
+		"title": "creality ld-002r",
+		"description": "impresora 3d SLA",
+		"code": "ld002r",
+		"price": 200000,
+		"stock": 25,
+		"category": "Impresoras"
+	},
+	{
+		"id": "4773caa0-461d-4bb7-93f3-495f2da2f5dd",
+		"status": true,
+		"title": "creality ld-002h",
+		"description": "impresora 3d SLA",
+		"code": "ld002h",
+		"price": 250000,
+		"stock": 20,
+		"category": "Impresoras"
 	}
-
 ]

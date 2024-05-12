@@ -2,12 +2,12 @@
 
 import fs from 'fs';
 import {v4 as uuid} from 'uuid';
-import { __dirname } from '../path';
+//import { __dirname } from '../path.js';
 import ProductsManager from './products.manager.js';
 
 // Instancias
 
-const productsManager = new ProductsManager(`${__dirname}/db/products.json`);
+//const productsManager = new ProductsManager(`${__dirname}/db/products.json`);
 
 // def clase
 

@@ -1,8 +1,12 @@
+// imports
+
 import fs from "fs";
 import { v4 as uuid } from "uuid";
 import { __dirname } from "../path";
 
-class ProductManager {
+
+// Definicion de clase
+class ProducstManager {
   constructor(path) {
     this.path = path;
   }
@@ -40,7 +44,7 @@ class ProductManager {
     try {
       const products = await this.getProducts();
       const productListed = products.find((product) => product.id === id);
-      return productListed ? productListed : null;
+      return productListed || null;
     } catch (error) {
       console.error(error);
     }
@@ -75,4 +79,4 @@ class ProductManager {
   }
 }
 
-export default ProductManager;
+export default ProducstManager;

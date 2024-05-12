@@ -3,10 +3,7 @@
 import { Router } from "express";
 import { __dirname } from "../path";
 import { productValidation } from "../middlewares/productValidation";
-// import ProductManager <<<<<<<-----------------
-
-
-
+import ProductManager from "../managers/products.manager.js";
 
 // instancias
 

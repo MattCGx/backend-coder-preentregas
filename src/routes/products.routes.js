@@ -12,17 +12,17 @@ const productManager = new ProductManager(`${__dirname}/db/products.json`);
 
 // rutas para products
 
-router.get("/", async (req, res) => {
+productRouter.get("/", async (req, res) => {
     try {
         const {queryLimit} = req.query;
         const products = await productManager.getProducts(queryLimit);
-        res.status(200).json(products);
+        !products ? res.status(404).json({ error: "Products not found" }) : res.status(200).json(products);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-router.get("/:productId", async (req, res) => {
+productRouter.get("/:productId", async (req, res) => {
 
     try {
         const { productId } = req.params;
@@ -34,7 +34,7 @@ router.get("/:productId", async (req, res) => {
     
 });
 
-router.post("/", productValidation, async (req, res) => {
+productRouter.post("/", productValidation, async (req, res) => {
     try {
         const productObj = req.body;
         const newProduct = await productManager.addNewProduct(productObj);
@@ -44,7 +44,7 @@ router.post("/", productValidation, async (req, res) => {
     }
 });
 
-router.put("/:productId", productValidation, async (req, res) => {
+productRouter.put("/:productId", productValidation, async (req, res) => {
     try {
         const { productId } = req.params;
         const productObj = req.body;
@@ -55,7 +55,7 @@ router.put("/:productId", productValidation, async (req, res) => {
     }
 })
 
-router.delete("/:productId", async (req, res) => {
+productRouter.delete("/:productId", async (req, res) => {
     try {
         const { productId } = req.params;
         const prodToDelete = await productManager.deleteProduct(productId);

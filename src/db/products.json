@@ -91,16 +91,6 @@
 		"category": "Impresoras"
 	},
 	{
-		"id": "65a53fe7-a726-4b67-b97b-94041455d41d",
-		"status": true,
-		"title": "creality ld-002r",
-		"description": "impresora 3d SLA",
-		"code": "ld002r",
-		"price": 200000,
-		"stock": 25,
-		"category": "Impresoras"
-	},
-	{
 		"id": "4773caa0-461d-4bb7-93f3-495f2da2f5dd",
 		"status": true,
 		"title": "creality ld-002h",
@@ -108,6 +98,16 @@
 		"code": "ld002h",
 		"price": 250000,
 		"stock": 20,
+		"category": "Impresoras"
+	},
+	{
+		"id": "65a53fe7-a726-4b67-b97b-94041455d41d",
+		"status": true,
+		"title": "creality ld-002r",
+		"description": "impresora 3d SLA",
+		"code": "ld002r",
+		"price": 200000,
+		"stock": 25,
 		"category": "Impresoras"
 	}
 ]

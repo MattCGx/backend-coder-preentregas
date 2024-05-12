@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { __dirname } from "../path.js";
-import {AddProdToCartValidation} from "../middlewares/addProdToCartValidation.js";
 import CartsManager from "../managers/carts.manager.js";
 
 // instancias

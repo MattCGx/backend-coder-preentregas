@@ -3,6 +3,7 @@
 import { Router } from "express";
 import { __dirname } from "../path.js";
 import { productValidation } from "../middlewares/productValidation.js";
+import { idValidation } from "../middlewares/idValidation.js";
 import ProductManager from "../managers/products.manager.js";
 
 // instancias
@@ -44,7 +45,7 @@ productRouter.post("/", productValidation, async (req, res) => {
     }
 });
 
-productRouter.put("/:productId", productValidation, async (req, res) => {
+productRouter.put("/:productId", idValidation, async (req, res) => {
     try {
         const { productId } = req.params;
         const productObj = req.body;

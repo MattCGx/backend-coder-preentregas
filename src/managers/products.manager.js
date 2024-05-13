@@ -59,6 +59,7 @@ class ProducstManager {
       const productsUpdated = products.filter((product) => product.id !== id);
       productsUpdated.push(productListed);
       await fs.promises.writeFile(this.path,JSON.stringify(productsUpdated, null, "\t"));
+      return productListed;
     } catch (error) {
       console.error(error);
     }

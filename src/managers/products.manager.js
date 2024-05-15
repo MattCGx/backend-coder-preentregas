@@ -16,7 +16,7 @@ class ProducstManager {
     try {
       if (fs.existsSync(this.path)) {
         const products = await fs.promises.readFile(this.path, "utf8");
-        return querylimit ? JSON.parse(products).slice(0, querylimit) : JSON.parse(products); 
+        return querylimit ? JSON.parse(products).slice(0, Math.max(0, querylimit)) : JSON.parse(products); 
       } else return [];
     } catch (error) {
       console.error(error);

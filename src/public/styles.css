@@ -59,6 +59,9 @@ body {
 
 .card-container {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
 }
 
@@ -68,7 +71,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 16px;    
-    max-width: 200px;
+    width: 150px;
     text-align: center;
 }
 

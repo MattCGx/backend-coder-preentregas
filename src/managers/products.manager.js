@@ -33,6 +33,7 @@ class ProducstManager {
       const products = await this.getProducts();
       products.push(newProduct);
       await fs.promises.writeFile(this.path,JSON.stringify(products, null, "\t"));
+      console.log("producto agregado");
       return newProduct;
     } catch (error) {
       console.error(error);

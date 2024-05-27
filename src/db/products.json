@@ -7,8 +7,7 @@
 		"code": "e3v2",
 		"price": 200000,
 		"stock": 20,
-		"category": "Impresoras",
-		"Thumbnails": "['https://proyectocolor.com.ar/wp-content/uploads/2022/11/ENDER3V2_PRINCIPAL-1.jpg','https://innova3d.com.ar/wp-content/uploads/2023/08/foto1-7.jpg']"
+		"category": "Impresoras"
 	},
 	{
 		"id": "44472749-ae58-4671-8a03-35b8122ce4ad",

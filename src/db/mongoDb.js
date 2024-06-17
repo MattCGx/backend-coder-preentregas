@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const connectionString = "mongodb+srv://mattcontrerasg:bTElCdg96IZaQrd3@mattcgx.pwtewoj.mongodb.net/?retryWrites=true&w=majority&appName=MattCgx"
+const connectionString = "mongodb+srv://mattcontrerasg:bTElCdg96IZaQrd3@mattcgx.pwtewoj.mongodb.net/proyectofinal?retryWrites=true&w=majority&appName=MattCgx"
 
 export const initMongoDB = async() => {
     try {

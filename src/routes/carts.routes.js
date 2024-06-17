@@ -1,11 +1,8 @@
 import { Router } from "express";
-import { __dirname } from "../path.js";
-import CartsManager from "../managers/carts.manager.js";
 
 // instancias
 
 const cartRouter = Router();
-const cartsManager = new CartsManager(`${__dirname}/db/carts.json`);
 
 // rutas para products
 

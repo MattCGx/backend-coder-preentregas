@@ -9,20 +9,20 @@ const cartRouter = Router();
 
 cartRouter.get("/", cartController.getAllCarts)
 
-cartRouter.get("/:cartID", cartController.getCartById);
+cartRouter.get("/:cid", cartController.getCartById);
 
 cartRouter.post("/", cartController.createCart);
 
-cartRouter.delete("/:cartID", cartController.deleteCart);
+cartRouter.delete("/:cid", cartController.deleteCart);
 
-cartRouter.put("/:cartID", cartController.updateCart);
+cartRouter.put("/:cid", cartController.updateCart);
 
-cartRouter.post("/:cartID/product/:productID", cartController.addProductToCart);
+cartRouter.post("/:cid/product/:pid", cartController.addProductToCart);
 
-cartRouter.delete("/:cartID/product/:productID", cartController.removefromCart);
+cartRouter.delete("/:cid/products/:pid", cartController.removefromCart);
 
-cartRouter.put("/:cartID/product/:productID", cartController.updateProdQuantity);
+cartRouter.put("/:cid/product/:pid", cartController.updateProdQuantity);
 
-cartRouter.delete("/:cartID", cartController.clearCart);
+cartRouter.delete("/:cid", cartController.clearCart);
 
 export default cartRouter;

@@ -1,11 +1,34 @@
 import { Router } from "express";
 import { __dirname } from "../path.js";
-import ProductManager from "../managers/products.manager.js";
+import * as productService from "../services/product.services.js";
+
 
 const router = Router();
-const productManager = new ProductManager(`${__dirname}/db/products.json`);
 
-router.get("/", async (req, res) => {
+
+
+router.get("/",  async (req, res, next) => {
+  try {
+    const { page, limit, name, sort } = req.query;
+    const response = await productService.getAllProducts(page, limit, name, sort);
+    const products = response.docs ? response.docs : [];
+    const nextLink = response.hasNextPage ? `http://localhost:8080/api/products?page=${response.nextPage}` : null;
+    const prevLink = response.hasPrevPage ? `http://localhost:8080/api/products?page=${response.prevPage}` : null;
+
+    res.render("home", { products, nextLink, prevLink });
+  } catch (error) {
+    console.log("error al renderizar");
+    next(error.message);
+  }
+});
+
+
+
+
+
+
+
+router.get("/old", async (req, res) => {
   try {
     const { limit } = req.query;
     const products = await productManager.getProducts(limit);
@@ -15,8 +38,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/realtimeproducts", async (req, res) => {
-  res.render("realtimeproducts");
+router.get("/admin", async (req, res) => {
+  res.render("admin");
 });
 
 export default router;

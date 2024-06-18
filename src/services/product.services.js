@@ -1,12 +1,12 @@
-import ProductDao from "../Daos/product.dao";
+import ProductDao from "../Daos/product.dao.js";
 
 //instancia de la clase ProductDao
 
 const productDao = new ProductDao();
 
-export const getAllProducts = async (page, limit, name, sort) => {
+export const getAllProducts = async (page, limit, title, sort) => {
   try {
-    return await productDao.getAllProducts(page, limit, name, sort);
+    return await productDao.getAllProducts(page, limit, title, sort);
   } catch (error) {
     console.log(error);
   }

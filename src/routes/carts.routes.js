@@ -1,39 +1,28 @@
 import { Router } from "express";
+import * as cartController from "../controllers/cart.controller.js";
 
 // instancias
 
 const cartRouter = Router();
 
-// rutas para products
+// rutas para carts
 
-cartRouter.get("/:cartID", async (req, res) => {
-    try {
-        const {cartID} = req.params;
-        const cart = await cartsManager.getCartById(cartID);
-        !cart ? res.status(404).json({ error: "Cart not found" }) : res.status(200).json(cart);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-    
-});
+cartRouter.get("/", cartController.getAllCarts)
 
-cartRouter.post("/", async (req, res) => {
-    try {
-       const cart = await cartsManager.addNewCart();
-       res.status(201).json(cart);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-})
+cartRouter.get("/:cartID", cartController.getCartById);
 
-cartRouter.post("/:cartID/product/:productID", async (req, res) => {
-    try {
-      const {cartID, productID} = req.params;
-      const cart = await cartsManager.addProductToCart(cartID, productID);
-        res.status(200).json(cart);  
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-})
+cartRouter.post("/", cartController.createCart);
+
+cartRouter.delete("/:cartID", cartController.deleteCart);
+
+cartRouter.put("/:cartID", cartController.updateCart);
+
+cartRouter.post("/:cartID/product/:productID", cartController.addProductToCart);
+
+cartRouter.delete("/:cartID/product/:productID", cartController.removefromCart);
+
+cartRouter.put("/:cartID/product/:productID", cartController.updateProdQuantity);
+
+cartRouter.delete("/:cartID", cartController.clearCart);
 
 export default cartRouter;

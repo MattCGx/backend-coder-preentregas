@@ -2,12 +2,13 @@ import * as productService from "../services/product.services.js";
 
 export const getAllProducts = async (req, res, next) => {
   try {
-    const { page, limit, name, sort } = req.query;
-    const response = await productService.getAllProducts(page, limit, name, sort);
-    // let url = `http://localhost:8080/products?page=${response.nextPage}`
-    // if(sort !== undefined) url + `&sort=${sort}`
-    const nextLink = response.hasNextPage ? `http://localhost:8080/products?page=${response.nextPage}` : null;
-    const prevLink = response.hasPrevPage ? `http://localhost:8080/products?page=${response.prevPage}` : null;
+    const { page, limit, title, sort } = req.query;
+    const response = await productService.getAllProducts(page, limit, title, sort);
+
+    const url = 'http://localhost:8080/api/products'; 
+
+    const nextLink = response.hasNextPage ? generateLinks(url, response.nextPage, limit, title, sort) : null;
+    const prevLink = response.hasPrevPage ? generateLinks(URL, response.prevPage, limit, title, sort) : null;
 
     res.status(200).json({
       status: 'success',
@@ -25,6 +26,16 @@ export const getAllProducts = async (req, res, next) => {
     next(error.message);
   }
 };
+
+const generateLinks = (url, page, limit, title, sort) => {
+  let link = `${url}?page=${page}`; 
+  if (limit) link += `&limit=${limit}`;
+  if (title) link += `&title=${title}`;
+  if (sort) link += `&sort=${sort}`;
+  return link;
+};
+
+ 
 
 export const getProductById = async (req, res, next) => {
   try {

@@ -1,12 +1,11 @@
 import { ProductModel } from "./models/product.model.js";
 
 export default class ProductDao {
-  async getAllProducts(page = 1, limit = 10, name, sort) {
+  async getAllProducts(page = 1, limit = 10, title, sort) {
     try {
-      const filter = name ? { 'name': name } : {};
+      const filter = title ? { 'title': title } : {};
       let sortOrder = {};
       if(sort) sortOrder.price = sort === 'asc' ? 1 : sort === 'desc' ? -1 : null;
-      //{price: 1}
       const response = await ProductModel.paginate(filter, { page, limit, sort: sortOrder });
       return response;
     } catch (error) {

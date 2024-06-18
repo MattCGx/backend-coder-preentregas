@@ -1,6 +1,6 @@
 import express from "express";
 import { __dirname } from "./src/path.js";
-import handlebars from 'express-handlebars';
+import hbs from "./src/handlebarsHbs.js";
 
 
 import viewsRouter from './src/routes/views.routes.js';
@@ -22,7 +22,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use('/api/carts', cartRouter);
 app.use('/api/products', productsRouter);
 
-app.engine('handlebars', handlebars.engine());
+app.engine('handlebars', hbs.engine);
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'handlebars');
 

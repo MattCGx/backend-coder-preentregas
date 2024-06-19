@@ -20,8 +20,8 @@ export const getAllCarts = async (req, res, next) => {
   
   export const getCartById = async (req, res, next) => {
     try {
-      const { id } = req.params;
-      const response = await service.getCartById(id);
+      const { cid } = req.params;
+      const response = await service.getCartById(cid);
       if (!response) res.status(404).json({ msg: "Cart not found 🚫" });
       else res.status(200).json(response);
     } catch (error) {
@@ -31,8 +31,8 @@ export const getAllCarts = async (req, res, next) => {
   
   export const updateCart = async (req, res, next) => {
     try {
-      const { id } = req.params;
-      const cartUpd = await service.updateCart(id, req.body);
+      const { cid } = req.params;
+      const cartUpd = await service.updateCart(cid, req.body);
       if (!cartUpd) res.status(404).json({ msg: "Error updating cart 🚫" });
       else res.status(200).json(cartUpd);
     } catch (error) {
@@ -42,10 +42,10 @@ export const getAllCarts = async (req, res, next) => {
   
   export const deleteCart = async (req, res, next) => {
     try {
-      const { id } = req.params;
-      const cartDel = await service.deleteCart(id);
+      const { cid } = req.params;
+      const cartDel = await service.deleteCart(cid);
       if (!cartDel) res.status(404).json({ msg: "Cannot delete cart 🚫" });
-      else res.status(200).json({ msg: `Cart id: ${id} deleted` });
+      else res.status(200).json({ msg: `Cart id: ${cid} deleted` });
     } catch (error) {
       next(error.message);
     }
@@ -53,12 +53,9 @@ export const getAllCarts = async (req, res, next) => {
 
 export const addProductToCart = async (req, res, next) => {
     try {
-      const { idCart } = req.params;
-      const { idProd } = req.params;
-      const ProductToAdd = await service.addProductToCart(
-        idCart,
-        idProd,
-      );
+      const { cid } = req.params;
+      const { pid } = req.params;
+      const ProductToAdd = await service.addProductToCart(cid,pid);
       if (!ProductToAdd) res.json({ msg: "Error adding product 🚫" });
       else res.json(ProductToAdd);
     } catch (error) {
@@ -68,14 +65,11 @@ export const addProductToCart = async (req, res, next) => {
 
   export const removefromCart = async (req, res, next) => {
     try {
-      const { idCart } = req.params;
-      const { idProd } = req.params;
-      const delProdToUserCart = await service.removefromCart(
-        idCart,
-        idProd,
-      );
+      const { cid } = req.params;
+      const { pid } = req.params;
+      const delProdToUserCart = await service.removefromCart(cid,pid);
       if (!delProdToUserCart) res.json({ msg: "cannot remove product from cart 🚫" });
-      else res.json({msg: `product ${idProd} deleted to cart`});
+      else res.json({msg: `the product ${pid} was removed from cart`});
     } catch (error) {
       next(error.message);
     }
@@ -83,12 +77,12 @@ export const addProductToCart = async (req, res, next) => {
 
   export const updateProdQuantity = async (req, res, next) => {
     try {
-      const { idCart } = req.params;
-      const { idProd } = req.params;
+      const { cid } = req.params;
+      const { pid } = req.params;
       const { quantity } = req.body;
       const  updateProdQuantity = await service.updateProdQuantity(
-        idCart,
-        idProd,
+        cid,
+        pid,
         quantity
       );
       if (!updateProdQuantity) res.json({ msg: "cannot update product quantity 🚫" });
@@ -100,10 +94,8 @@ export const addProductToCart = async (req, res, next) => {
 
   export const clearCart = async (req, res, next) => {
     try {
-      const { idCart } = req.params;
-      const clearCart = await service.clearCart(
-        idCart,
-      );
+      const { cid } = req.params;
+      const clearCart = await service.clearCart(cid);
       if (!clearCart) res.json({ msg: "cannot clear this cart 🚫" });
       else res.json(clearCart);
     } catch (error) {

@@ -22,25 +22,27 @@ export const getAllCarts = async () => {
   }
 };
 
-export const getCartById = async (id) => {
+export const getCartById = async (cartId) => {
   try {
-    return await cartDao.getCartById(id);
+    return await cartDao.getCartById(cartId);
   } catch (error) {
     console.log(error);
   }
 };
 
-export const updateCart = async (id, obj) => {
+export const updateCart = async (cartId, obj) => {
   try {
-    return await cartDao.updateCart(id, obj);
+    const existCart = await cartDao.getCartById(cartId);
+    if (!existCart) throw new Error("Cart not found");
+    return await cartDao.updateCart(cartId, obj);
   } catch (error) {
     console.log(error);
   }
 };
 
-export const deleteCart = async (id) => {
+export const deleteCart = async (cartId) => {
   try {
-    const cartToDelete = await cartDao.deleteCart(id);
+    const cartToDelete = await cartDao.deleteCart(cartId);
     if (!cartToDelete) return false;
     else return cartToDelete;
   } catch (error) {
@@ -50,10 +52,13 @@ export const deleteCart = async (id) => {
 
 export const addProductToCart = async (cartId, productId) => {
   try {
-    const existCart = await getCartById(cartId);
-    const existProd = await productsDao.getProductById(productId);
+    const existCart = await cartDao.getCartById(cartId);
+    if (!existCart) throw new Error("Cart not found");
 
-    existCart || existProd ? null :  await cartDao.addProductToCart(cartId, productId);
+    const existProd = await productDao.getProductById(productId);
+    if (!existProd) throw new Error("Product not found");
+
+    return await cartDao.addProductToCart(cartId, productId);
   } catch (error) {
     console.log(error);
   }
@@ -62,10 +67,10 @@ export const addProductToCart = async (cartId, productId) => {
 export const removefromCart = async (cartId, productId) => {
   try {
     const existCart = await getCartById(cartId);
-    if (!existCart) return null;
+    if (!existCart) throw new Error("Cart not found");
 
     const existProdInCart = await cartDao.isInCart(cartId, productId);
-    if (!existProdInCart) return null;
+    if (!existProdInCart) throw new Error("Product not found in cart");
     
     return await cartDao.removefromCart(cartId, productId);
   } catch (error) {
@@ -76,9 +81,9 @@ export const removefromCart = async (cartId, productId) => {
 export const updateProdQuantity = async (cartId, productId, quantity) => {
   try {
     const existCart = await getCartById(cartId);
-    if (!existCart) return null;
+    if (!existCart) throw new Error("Cart not found");
     const existProdInCart = await cartDao.isInCart(cartId, productId);
-    if (!existProdInCart) return null;
+    if (!existProdInCart) throw new Error("Product not found in cart");
     return await cartDao.updateProdQuantity(cartId, productId, quantity);
   } catch (error) {
     console.log(error);
@@ -88,7 +93,7 @@ export const updateProdQuantity = async (cartId, productId, quantity) => {
 export const clearCart = async (cartId) => {
   try {
     const existCart = await getCartById(cartId);
-    if (!existCart) return null;
+    if (!existCart) throw new Error("Cart not found");
     return await cartDao.clearCart(cartId)
   } catch (error) {
     console.log(error);

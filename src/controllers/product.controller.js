@@ -39,9 +39,9 @@ const generateLinks = (url, page, limit, title, sort) => {
 
 export const getProductById = async (req, res, next) => {
   try {
-    const { productId } = req.params;
-    const response = await productService.getProductById(productId);
-    if (!response) res.status(404).json({ msg: `cannot find product ${productId} 🚫` });
+    const { pid } = req.params;
+    const response = await productService.getProductById(pid);
+    if (!response) res.status(404).json({ msg: `cannot find product ${pid} 🚫` });
     else res.status(200).json(response);
   } catch (error) {
     next(error.message);
@@ -60,8 +60,8 @@ export const createProduct = async (req, res, next) => {
 
 export const updateProduct = async (req, res, next) => {
   try {
-    const { productId } = req.params;
-    const productUpdate = await productService.updateProduct(productId, req.body);
+    const { pid } = req.params;
+    const productUpdate = await productService.updateProduct(pid, req.body);
     if (!productUpdate) res.status(404).json({ msg: "cannot update product 🚫" });
     else res.status(200).json(productUpdate);
   } catch (error) {
@@ -71,10 +71,10 @@ export const updateProduct = async (req, res, next) => {
 
 export const deleteProduct = async (req, res, next) => {
   try {
-    const { productId } = req.params;
-    const productToDelete = await productService.deleteProduct(productId);
+    const { pid } = req.params;
+    const productToDelete = await productService.deleteProduct(pid);
     if (!productToDelete) res.status(404).json({ msg: "cannot delete product 🚫 " });
-    else res.status(200).json({ msg: `The Product id: ${productId} was deleted ✅` });
+    else res.status(200).json({ msg: `The Product id: ${pid} was deleted ✅` });
   } catch (error) {
     next(error.message);
   }

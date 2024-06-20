@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { __dirname } from "../path.js";
 import * as productService from "../services/product.services.js";
+import * as cartService from "../services/cart.services.js";
 
 
 const router = Router();
@@ -36,11 +37,45 @@ router.get("/",  async (req, res, next) => {
   }
 });
 
+router.get("/product/:pid", async (req, res, next) => {
+  try {
+    const { pid } = req.params;
+    const product = await productService.getProductById(pid);
+    if (!product) {
+      return res.status(404).render("error", { message: "Producto no encontrado" });
+    }
+    res.render("product", { product });
+  } catch (error) {
+    console.log("error al obtener el producto ❌");
+    next(error.message);
+  }
+});
 
+router.post("/carts/:cid/product/:pid", async (req, res, next) => {
+  try{
+    const { cid } = req.params;
+    const { pid } = req.params;
+    const product = await service.addProductToCart(cid,pid) 
+    res.render("product", { product });
+  } catch (error) {
+    console.log("error al agregar el producto ❌");
+    next(error.message);
+  }
+});
 
-
-
-
+router.get("/carts/:cid", async (req, res, next) => {
+  try {
+    const { cid } = req.params;
+    const cart = await cartService.getCartById(cid);
+    if (!cart) {
+      return res.status(404).render("error", { message: "Carrito no encontrado" });
+    }
+    res.render("cart", { cart });
+  } catch (error) {
+    console.log("error al obtener el Carrito ❌");
+    next(error.message);
+  }
+});
 
 router.get("/old", async (req, res) => {
   try {

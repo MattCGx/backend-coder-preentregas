@@ -22,6 +22,8 @@ productRouter.post("/baseinicio", productController.createProduct); // un solo u
 
 productRouter.put("/:pid", idValidation, productController.updateProduct);
 
+productRouter.post("/:pid", productController.updateProduct); // un solo uso, xq me daba fiaca agregar las imagenes por codigo.
+
 productRouter.delete("/:pid", productController.deleteProduct)
 
 export default productRouter;
